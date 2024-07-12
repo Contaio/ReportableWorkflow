@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>com.espirit.ps.maven</groupId>
+        <artifactId>firstspirit-module-parent-pom</artifactId>
+        <version>4.0.0</version>
+    </parent>
+
+    <groupId>com.espirit.ps.rw</groupId>
+    <artifactId>server</artifactId>
+    <name>reportable_workflow</name>
+    <version>5.1.6</version>
+    <url>https://git.contaio.net/Contaio/ReportableWorkflow</url>
+    <modelVersion>4.0.0</modelVersion>
+
+    <organization>
+        <name>Contaio - Software Solutions GmbH</name>
+        <url>http://www.contaio.de</url>
+    </organization>
+    <description>FirstSpirit Workflow Module with advanced features.</description>
+    <packaging>jar</packaging>
+
+    <properties>
+        <firstspirit.api.isolated-runtime>2023.6</firstspirit.api.isolated-runtime>
+        <java.version>11</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.espirit.firstspirit</groupId>
+            <artifactId>fs-isolated-runtime</artifactId>
+            <version>2023.6</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.espirit.ps.psci</groupId>
+                <artifactId>module-resource-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-module-resources</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <defaultConfiguration>
+                                <scope>server</scope>
+                                <components>global</components>
+                                <isolated>true</isolated>
+                                <path>lib/</path>
+                                <useDefaultMinVersion>true</useDefaultMinVersion>
+                            </defaultConfiguration>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>rename-fsm</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <copy file="/Users/armin_wolf/Development/kanton-aargau/reportable_workflow/target/server-5.1.6.fsm"
+                                      tofile="/Users/armin_wolf/Development/kanton-aargau/reportable_workflow/target/reportable_workflow-5.1.6.fsm"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,2 +1,4 @@
 Manifest-Version: 1.0
+Build-Jdk: 11.0.18+10 (Eclipse Adoptium)
+Created-By: Gradle 7.3.1
 

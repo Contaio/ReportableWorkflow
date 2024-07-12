@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <copy file="/Users/armin_wolf/Development/kanton-aargau/reportable_workflow/target/server-5.1.6.fsm" tofile="/Users/armin_wolf/Development/kanton-aargau/reportable_workflow/target/reportable_workflow-5.1.6.fsm"/>
+</target>
+</project>

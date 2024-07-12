@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+    <name>reportable_workflow</name>
+    <displayname>Reportable Workflow (I)</displayname>
+    <version>5.1.6</version>
+    <description>FirstSpirit Workflow Module with advanced features.</description>
+    <vendor>Contaio - Software Solutions GmbH</vendor>
+    <vendor>e-Spirit AG</vendor>
+    <licenses>META-INF/licenses.csv</licenses>
+
+    <components>
+        <public>
+            <name>reportable_workflow_java_client_session</name>
+            <displayname>JavaClientSession</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.client.JavaClientSession</class>
+        </public>
+        <public>
+            <name>reportable_workflow_web_edit_session</name>
+            <displayname>WebEditSession</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.client.WebEditSession</class>
+        </public>
+        <public>
+            <name>reportable_workflow_delete_validation_state_data_access_plugin</name>
+            <displayname>DeleteValidationStateDAP</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.dataaccess.delete.DeleteValidationStateDataAccessPlugin</class>
+        </public>
+        <public>
+            <name>reportable_workflow_release_validation_state_data_access_plugin</name>
+            <displayname>ReleaseValidationStateDAP</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.dataaccess.release.ReleaseValidationStateDataAccessPlugin</class>
+        </public>
+        <public>
+            <name>reportable_workflow_delete_element_executable</name>
+            <displayname>DeleteElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.DeleteElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_release_depended_recursive_element_executable</name>
+            <displayname>DependedRecursiveReleaseElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.DependedRecursiveReleaseElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_depended_release_element_executable</name>
+            <displayname>DependedReleaseElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.DependedReleaseElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_release_media_depended_recursive_element_executable</name>
+            <displayname>MediaDependedRecursiveReleaseElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.MediaDependedRecursiveReleaseElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_media_depended_release_element_executable</name>
+            <displayname>MediaDependedReleaseElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.MediaDependedReleaseElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_recursive_release_element_executable</name>
+            <displayname>RecursiveReleaseElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.RecursiveReleaseElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_release_element_executable</name>
+            <displayname>ReleaseElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.ReleaseElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_validate_delete_element_executable</name>
+            <displayname>ValidateDeleteElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.ValidateDeleteElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_validate_depended_recursive_release_element_executable</name>
+            <displayname>ValidateDependedRecursiveReleaseElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.ValidateDependedRecursiveReleaseElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_validate_depended_release_element_executable</name>
+            <displayname>ValidateDependedReleaseElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.ValidateDependedReleaseElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_validate_media_depended_recursive_release_element_executable</name>
+            <displayname>ValidateMediaDependedRecursiveReleaseElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.ValidateMediaDependedRecursiveReleaseElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_validate_media_depended_release_element_executable</name>
+            <displayname>ValidateMediaDependedReleaseElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.ValidateMediaDependedReleaseElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_validate_recursive_release_element_executable</name>
+            <displayname>ValidateRecursiveReleaseElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.ValidateRecursiveReleaseElementExecutable</class>
+        </public>
+        <public>
+            <name>reportable_workflow_validate_release_element_executable</name>
+            <displayname>ValidateElementExecutable</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.executable.ValidateReleaseElementExecutable</class>
+        </public>
+        <project-app>
+            <name>reportable_workflow_projectapp</name>
+            <displayname>Reportable Workflow - ProjectApp</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.common.ReportableWorkflowProjectApp</class>
+            <configurable>com.espirit.ps.rw.common.configuration.ProjectAppConfigurationDialog</configurable>
+        </project-app>
+        <web-app scopes="global,project">
+            <name>reportable_workflow_web_app</name>
+            <displayname>Reportable Workflow - WebApp</displayname>
+            <description/>
+            <class>com.espirit.ps.rw.webapp.ReportableWorkflowDummyWebApp</class>
+            <web-xml>webedit/reportable_workflow/web.xml</web-xml>
+            <web-resources>
+                <resource name="com.espirit.ps.rw:webfiles" version="0.1" target="/">webedit/</resource>
+                <resource name="com.espirit.ps.rw:server" version="5.1.6">lib/server-5.1.6.jar</resource>
+                <resource name="org.jetbrains:annotations" version="24.0.0">lib/annotations-24.0.0.jar</resource>
+            </web-resources>
+        </web-app>
+    </components>
+    <resources>
+        <resource name="com.espirit.ps.rw:server" scope="server" mode="isolated" version="5.1.6">lib/server-5.1.6.jar
+        </resource>
+    </resources>
+</module>

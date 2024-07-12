@@ -4,7 +4,7 @@
       
   <displayname>Reportable Workflow (I)</displayname>
       
-  <version>5.1.4</version>
+  <version>5.1.6</version>
       
   <description>reportable_workflow</description>
       
@@ -24,6 +24,8 @@
                   
       <displayname>JavaClientSession</displayname>
                   
+      <description/>
+                  
       <class>com.espirit.ps.rw.client.JavaClientSession</class>
               
     </public>
@@ -33,6 +35,8 @@
       <name>reportable_workflow_web_edit_session</name>
                   
       <displayname>WebEditSession</displayname>
+                  
+      <description/>
                   
       <class>com.espirit.ps.rw.client.WebEditSession</class>
               
@@ -44,6 +48,8 @@
                   
       <displayname>DeleteValidationStateDAP</displayname>
                   
+      <description/>
+                  
       <class>com.espirit.ps.rw.dataaccess.delete.DeleteValidationStateDataAccessPlugin</class>
               
     </public>
@@ -53,6 +59,8 @@
       <name>reportable_workflow_release_validation_state_data_access_plugin</name>
                   
       <displayname>ReleaseValidationStateDAP</displayname>
+                  
+      <description/>
                   
       <class>com.espirit.ps.rw.dataaccess.release.ReleaseValidationStateDataAccessPlugin</class>
               
@@ -64,6 +72,8 @@
                   
       <displayname>DeleteElementExecutable</displayname>
                   
+      <description/>
+                  
       <class>com.espirit.ps.rw.executable.DeleteElementExecutable</class>
               
     </public>
@@ -73,6 +83,8 @@
       <name>reportable_workflow_release_depended_recursive_element_executable</name>
                   
       <displayname>DependedRecursiveReleaseElementExecutable</displayname>
+                  
+      <description/>
                   
       <class>com.espirit.ps.rw.executable.DependedRecursiveReleaseElementExecutable</class>
               
@@ -84,7 +96,33 @@
                   
       <displayname>DependedReleaseElementExecutable</displayname>
                   
+      <description/>
+                  
       <class>com.espirit.ps.rw.executable.DependedReleaseElementExecutable</class>
+              
+    </public>
+            
+    <public>
+                  
+      <name>reportable_workflow_release_media_depended_recursive_element_executable</name>
+                  
+      <displayname>MediaDependedRecursiveReleaseElementExecutable</displayname>
+                  
+      <description/>
+                  
+      <class>com.espirit.ps.rw.executable.MediaDependedRecursiveReleaseElementExecutable</class>
+              
+    </public>
+            
+    <public>
+                  
+      <name>reportable_workflow_media_depended_release_element_executable</name>
+                  
+      <displayname>MediaDependedReleaseElementExecutable</displayname>
+                  
+      <description/>
+                  
+      <class>com.espirit.ps.rw.executable.MediaDependedReleaseElementExecutable</class>
               
     </public>
             
@@ -93,6 +131,8 @@
       <name>reportable_workflow_recursive_release_element_executable</name>
                   
       <displayname>RecursiveReleaseElementExecutable</displayname>
+                  
+      <description/>
                   
       <class>com.espirit.ps.rw.executable.RecursiveReleaseElementExecutable</class>
               
@@ -104,6 +144,8 @@
                   
       <displayname>ReleaseElementExecutable</displayname>
                   
+      <description/>
+                  
       <class>com.espirit.ps.rw.executable.ReleaseElementExecutable</class>
               
     </public>
@@ -113,6 +155,8 @@
       <name>reportable_workflow_validate_delete_element_executable</name>
                   
       <displayname>ValidateDeleteElementExecutable</displayname>
+                  
+      <description/>
                   
       <class>com.espirit.ps.rw.executable.ValidateDeleteElementExecutable</class>
               
@@ -124,6 +168,8 @@
                   
       <displayname>ValidateDependedRecursiveReleaseElementExecutable</displayname>
                   
+      <description/>
+                  
       <class>com.espirit.ps.rw.executable.ValidateDependedRecursiveReleaseElementExecutable</class>
               
     </public>
@@ -134,7 +180,33 @@
                   
       <displayname>ValidateDependedReleaseElementExecutable</displayname>
                   
+      <description/>
+                  
       <class>com.espirit.ps.rw.executable.ValidateDependedReleaseElementExecutable</class>
+              
+    </public>
+            
+    <public>
+                  
+      <name>reportable_workflow_validate_media_depended_recursive_release_element_executable</name>
+                  
+      <displayname>ValidateMediaDependedRecursiveReleaseElementExecutable</displayname>
+                  
+      <description/>
+                  
+      <class>com.espirit.ps.rw.executable.ValidateMediaDependedRecursiveReleaseElementExecutable</class>
+              
+    </public>
+            
+    <public>
+                  
+      <name>reportable_workflow_validate_media_depended_release_element_executable</name>
+                  
+      <displayname>ValidateMediaDependedReleaseElementExecutable</displayname>
+                  
+      <description/>
+                  
+      <class>com.espirit.ps.rw.executable.ValidateMediaDependedReleaseElementExecutable</class>
               
     </public>
             
@@ -143,6 +215,8 @@
       <name>reportable_workflow_validate_recursive_release_element_executable</name>
                   
       <displayname>ValidateRecursiveReleaseElementExecutable</displayname>
+                  
+      <description/>
                   
       <class>com.espirit.ps.rw.executable.ValidateRecursiveReleaseElementExecutable</class>
               
@@ -153,6 +227,8 @@
       <name>reportable_workflow_validate_release_element_executable</name>
                   
       <displayname>ValidateElementExecutable</displayname>
+                  
+      <description/>
                   
       <class>com.espirit.ps.rw.executable.ValidateReleaseElementExecutable</class>
               
@@ -186,11 +262,13 @@
                   
       <web-resources>
                         
-        <resource name="de.pinuts.beckhoff.firstspirit:reportable_workflow" version="5.1.4">lib/reportable_workflow-5.1.4.jar</resource>
+        <resource name="com.espirit.ps.rw:reportable_workflow" version="5.1.6">lib/reportable_workflow-5.1.6.jar</resource>
                         
         <resource name="com.espirit.ps.rw:webfiles" version="0.1" target="/">webedit/</resource>
                         
-        <resource name="com.espirit.ps.rw:server" version="5.1.4">lib/server-5.1.4.jar</resource>
+        <resource name="com.espirit.ps.rw:server" version="5.1.6">lib/server-5.1.6.jar</resource>
+                        
+        <resource name="org.jetbrains:annotations" version="24.0.0">lib/annotations-24.0.0.jar</resource>
                     
       </web-resources>
               
@@ -200,11 +278,13 @@
       
   <resources>
             
-    <resource name="de.pinuts.beckhoff.firstspirit:reportable_workflow" version="5.1.4" scope="module" mode="isolated">lib/reportable_workflow-5.1.4.jar</resource>
+    <resource name="com.espirit.ps.rw:reportable_workflow" version="5.1.6" scope="module" mode="isolated">lib/reportable_workflow-5.1.6.jar</resource>
             
-    <resource name="de.pinuts.beckhoff.firstspirit:reportable_workflow-webedit" version="5.1.4" scope="module" mode="isolated">webedit</resource>
+    <resource name="com.espirit.ps.rw:reportable_workflow-webedit" version="5.1.6" scope="module" mode="isolated">webedit</resource>
             
-    <resource name="com.espirit.ps.rw:server" scope="server" mode="isolated" version="5.1.4">lib/server-5.1.4.jar</resource>
+    <resource name="com.espirit.ps.rw:server" scope="server" mode="isolated" version="5.1.6">lib/server-5.1.6.jar</resource>
+            
+    <resource name="org.jetbrains:annotations" scope="server" mode="isolated" version="24.0.0">lib/annotations-24.0.0.jar</resource>
         
   </resources>
   

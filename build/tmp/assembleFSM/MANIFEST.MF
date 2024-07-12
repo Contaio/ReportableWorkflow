@@ -1,2 +1,5 @@
 Manifest-Version: 1.0
+Created-By: FirstSpirit Module Gradle Plugin 2.1.2
+Build-Jdk: 11.0.18+10 (Eclipse Adoptium)
+Build-Tool: Gradle 7.3.1
 
