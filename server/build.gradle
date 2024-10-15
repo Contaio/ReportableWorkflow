@@ -4,20 +4,32 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
-    mavenCentral()
+    maven {
+        url = 'https://artifactory.e-spirit.hosting/artifactory/repo/'
+        credentials {
+            username = artifactory_hosting_username
+            password = artifactory_hosting_password
+        }
+    }
 }
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+compileJava {
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+}
 
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 
-group = 'com.espirit.ps.rw'
+group = 'de.contaio.firstspirit.reportable.workflows'
 
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compileOnly group: 'de.espirit.firstspirit', name: 'fs-isolated-runtime', version: '2022.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${jupiterVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${jupiterVersion}"
+    compileOnly group: 'de.espirit.firstspirit', name: 'fs-isolated-runtime', version: "${fsRuntimeVersion}"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '8.10.2'
 }
