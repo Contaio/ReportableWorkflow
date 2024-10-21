@@ -2,6 +2,7 @@ package com.espirit.ps.rw.dependency;
 
 
 import com.espirit.ps.rw.resources.Resources;
+import de.espirit.common.base.Logging;
 import de.espirit.firstspirit.access.Language;
 import de.espirit.firstspirit.access.ReferenceEntry;
 import de.espirit.firstspirit.access.store.IDProvider;
@@ -216,6 +217,7 @@ public final class ValidationState implements Comparable<ValidationState> {
 	
 	
 	public static ValidationState createIgnoredOnRelease(final Handle handle, final IDProvider element) {
+		Logging.logError("Hier sind wir ", ValidationState.class);
 		return new ValidationState(handle, Type.IGNORED_ON_RELEASE, element, null);
 	}
 	

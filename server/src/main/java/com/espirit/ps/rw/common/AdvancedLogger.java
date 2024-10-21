@@ -21,7 +21,6 @@ public class AdvancedLogger {
 		}
 	}
 	
-	
 	public AdvancedLogger(final boolean advancedLoggingEnabled, final Class<?> caller) {
 		this.caller = caller;
 		this.advancedLoggingEnabled = advancedLoggingEnabled;

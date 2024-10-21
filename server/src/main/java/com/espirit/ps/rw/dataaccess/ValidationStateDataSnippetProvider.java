@@ -3,6 +3,7 @@ package com.espirit.ps.rw.dataaccess;
 import com.espirit.ps.rw.common.ReportableWorkflowUtil;
 import com.espirit.ps.rw.dependency.ValidationState;
 import com.espirit.ps.rw.resources.Resources;
+import de.espirit.common.base.Logging;
 import de.espirit.firstspirit.access.BaseContext;
 import de.espirit.firstspirit.access.Language;
 import de.espirit.firstspirit.access.ReferenceEntry;
@@ -45,7 +46,7 @@ public class ValidationStateDataSnippetProvider implements DataSnippetProvider<V
 		if (language == null) {
 			language = ReportableWorkflowUtil.getDisplayLanguage(context);
 		}
-		
+
 		if (state.getType() == ValidationState.Type.BROKEN && state.getObject() instanceof ReferenceEntry) {
 			return getMessage(state, null) + " \"" + state.getElement().getDisplayName(language) + "\"";
 		} else if (state.getType() == ValidationState.Type.DISPLAY_ONLY) {
@@ -68,10 +69,14 @@ public class ValidationStateDataSnippetProvider implements DataSnippetProvider<V
 		if (language == null) {
 			language = ReportableWorkflowUtil.getDisplayLanguage(context);
 		}
-		
+
 		if (state.getType() == ValidationState.Type.BROKEN && state.getObject() instanceof ReferenceEntry) {
 			ReferenceEntry entry = (ReferenceEntry) state.getObject();
-			header = getLabel(state, null) + ": " + " \"" + entry.getReferenceString() + "\" [" + entry.getStoreType().name() + "]"; // TODO
+			if (entry.getStoreType() == null) {
+				header = getLabel(state, null) + ": " + " \"" + entry.getReferenceString() + "\"" ;
+			} else {
+				header = getLabel(state, null) + ": " + " \"" + entry.getReferenceString() + "\" [" + entry.getStoreType().name() + "]";
+			}
 		} else if (state.getType() == ValidationState.Type.DISPLAY_ONLY) {
 			try {
 				header = context.requireSpecialist(SnippetAgent.TYPE).getSnippetProvider(state.getElement()).getHeader(language);
