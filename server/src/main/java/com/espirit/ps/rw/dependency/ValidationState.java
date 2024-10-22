@@ -217,7 +217,6 @@ public final class ValidationState implements Comparable<ValidationState> {
 	
 	
 	public static ValidationState createIgnoredOnRelease(final Handle handle, final IDProvider element) {
-		Logging.logError("Hier sind wir ", ValidationState.class);
 		return new ValidationState(handle, Type.IGNORED_ON_RELEASE, element, null);
 	}
 	

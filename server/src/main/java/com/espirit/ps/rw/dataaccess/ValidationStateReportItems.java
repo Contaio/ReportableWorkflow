@@ -7,10 +7,13 @@ import com.espirit.ps.rw.dataaccess.delete.DeleteValidationStateDataAccessPlugin
 import com.espirit.ps.rw.dataaccess.release.ReleaseValidationStateDataAccessPlugin;
 import com.espirit.ps.rw.dependency.Action;
 import com.espirit.ps.rw.dependency.DependencyUtil;
+import com.espirit.ps.rw.dependency.Handle;
 import com.espirit.ps.rw.dependency.Manager;
+import com.espirit.ps.rw.dependency.ReferencedEntryHandle;
 import com.espirit.ps.rw.dependency.ValidationState;
 import com.espirit.ps.rw.resources.Resources;
 import com.espirit.ps.rw.workflow.ReportableWorkflow;
+import de.espirit.common.base.Logging;
 import de.espirit.firstspirit.access.BaseContext;
 import de.espirit.firstspirit.access.store.StoreElement;
 import de.espirit.firstspirit.agency.OperationAgent;
@@ -123,7 +126,13 @@ public class ValidationStateReportItems implements ReportItemsProviding<Validati
 				message = Resources.getLabel("data.access.report.item.reference_chain.empty", getClass());
 			}
 
-			context.requireSpecialist(OperationAgent.TYPE).getOperation(RequestOperation.TYPE).perform(message);
+			Handle handle = context.getObject().getHandle();
+			handle.getKeyObject();
+			if (handle instanceof ReferencedEntryHandle && ((ReferencedEntryHandle) handle).getType().equals(ReferencedEntryHandle.Type.EXTERNAL)){
+				context.requireSpecialist(OperationAgent.TYPE).getOperation(RequestOperation.TYPE).perform("Are we here?" + handle.getKeyObject());
+			} else {
+				context.requireSpecialist(OperationAgent.TYPE).getOperation(RequestOperation.TYPE).perform(message);
+			}
 		}
 
 
@@ -246,9 +255,12 @@ public class ValidationStateReportItems implements ReportItemsProviding<Validati
 				isWorkflow |= ClientSession.getItem(context, identifier, null) != null;
 			}
 			boolean isActionType;
+			Handle handle = context.getObject().getHandle();
 
 			switch (context.getObject().getType()) {
 				case UNRELEASED:
+					isActionType = handle instanceof ReferencedEntryHandle && ((ReferencedEntryHandle) handle).getType().equals(ReferencedEntryHandle.Type.EXTERNAL);
+					break;
 				case IGNORED_ON_DELETE:
 				case IGNORED_ON_RELEASE:
 					isActionType = true;
@@ -256,7 +268,6 @@ public class ValidationStateReportItems implements ReportItemsProviding<Validati
 				default:
 					isActionType = false;
 			}
-
 			return isActionType && isStoreElement && isWorkflow;
 		}
 	}
