@@ -12,8 +12,6 @@ import de.espirit.firstspirit.access.store.contentstore.Content2;
 import de.espirit.firstspirit.access.store.contentstore.Dataset;
 import de.espirit.firstspirit.access.store.sitestore.PageRef;
 import de.espirit.firstspirit.access.store.templatestore.MasterTemplate;
-import de.espirit.firstspirit.agency.OperationAgent;
-import de.espirit.firstspirit.ui.operations.RequestOperation;
 import de.espirit.or.schema.Entity;
 
 import java.util.Set;

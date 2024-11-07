@@ -1,6 +1,8 @@
 package com.espirit.ps.rw.dataaccess;
 
 import com.espirit.ps.rw.common.ReportableWorkflowUtil;
+import com.espirit.ps.rw.dependency.Handle;
+import com.espirit.ps.rw.dependency.ReferencedEntryHandle;
 import com.espirit.ps.rw.dependency.ValidationState;
 import com.espirit.ps.rw.resources.Resources;
 import de.espirit.common.base.Logging;
@@ -11,6 +13,7 @@ import de.espirit.firstspirit.access.store.IDProvider;
 import de.espirit.firstspirit.agency.Image;
 import de.espirit.firstspirit.agency.SnippetAgent;
 import de.espirit.firstspirit.client.plugin.dataaccess.DataSnippetProvider;
+import de.espirit.firstspirit.server.reference.ExternalReferenceEntry;
 
 import java.util.HashMap;
 
@@ -43,6 +46,8 @@ public class ValidationStateDataSnippetProvider implements DataSnippetProvider<V
 	
 	@Override
 	public String getExtract(final ValidationState state, Language language) {
+		Handle handle = state.getHandle();
+
 		if (language == null) {
 			language = ReportableWorkflowUtil.getDisplayLanguage(context);
 		}
@@ -55,6 +60,8 @@ public class ValidationStateDataSnippetProvider implements DataSnippetProvider<V
 			} catch (Exception ignore) {
 				return getMessage(state, null);
 			}
+		} else if (handle instanceof ReferencedEntryHandle && ((ReferencedEntryHandle) handle).getType().equals(ReferencedEntryHandle.Type.EXTERNAL)) {
+			return getMessage(state,null) + " - " + ((ExternalReferenceEntry) handle.getKeyObject()).getReferenceString();
 		} else {
 			return getMessage(state, null);
 		}

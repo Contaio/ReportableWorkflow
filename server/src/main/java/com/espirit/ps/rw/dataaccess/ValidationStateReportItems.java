@@ -42,6 +42,7 @@ public class ValidationStateReportItems implements ReportItemsProviding<Validati
 
 		if (this.plugin.getAction().equals(Action.RELEASE)) {
 			items.add(new IgnoreItem());
+			items.add(new ExternalRefernceIgnoreItem());
 		}
 
 		if (DependencyUtil.isTemplateDeveloper(context)) {
@@ -126,13 +127,7 @@ public class ValidationStateReportItems implements ReportItemsProviding<Validati
 				message = Resources.getLabel("data.access.report.item.reference_chain.empty", getClass());
 			}
 
-			Handle handle = context.getObject().getHandle();
-			handle.getKeyObject();
-			if (handle instanceof ReferencedEntryHandle && ((ReferencedEntryHandle) handle).getType().equals(ReferencedEntryHandle.Type.EXTERNAL)){
-				context.requireSpecialist(OperationAgent.TYPE).getOperation(RequestOperation.TYPE).perform("Are we here?" + handle.getKeyObject());
-			} else {
-				context.requireSpecialist(OperationAgent.TYPE).getOperation(RequestOperation.TYPE).perform(message);
-			}
+			context.requireSpecialist(OperationAgent.TYPE).getOperation(RequestOperation.TYPE).perform(message);
 		}
 
 
@@ -254,21 +249,98 @@ public class ValidationStateReportItems implements ReportItemsProviding<Validati
 			for (String identifier : identifiers) {
 				isWorkflow |= ClientSession.getItem(context, identifier, null) != null;
 			}
-			boolean isActionType;
-			Handle handle = context.getObject().getHandle();
+			boolean isActionType = false;
 
 			switch (context.getObject().getType()) {
 				case UNRELEASED:
-					isActionType = handle instanceof ReferencedEntryHandle && ((ReferencedEntryHandle) handle).getType().equals(ReferencedEntryHandle.Type.EXTERNAL);
 					break;
 				case IGNORED_ON_DELETE:
 				case IGNORED_ON_RELEASE:
 					isActionType = true;
 					break;
-				default:
-					isActionType = false;
 			}
 			return isActionType && isStoreElement && isWorkflow;
+		}
+	}
+
+	public class ExternalRefernceIgnoreItem extends IgnoreItem {
+
+		@Override
+		public void execute(final ReportContext<ValidationState> context) {
+			Manager           manager   = plugin.getSessionBuilder().getSession().getStreamBuilder().getManager();
+			Set<StoreElement> ignoreSet = ReportableWorkflowUtil.buildIgnoreSet(manager);
+
+			if (context.getObject().getObject() instanceof StoreElement) {
+				StoreElement storeElement = (StoreElement) context.getObject().getObject();
+				switch (context.getObject().getType()) {
+					case URL_NOT_VALID:
+						ignoreSet.add(storeElement);
+						break;
+					case IGNORED_ON_RELEASE:
+						ignoreSet.remove(storeElement);
+						break;
+					default:
+						// Nothing to do
+				}
+				for (final String startStoreIdentifier : ReportableWorkflow.getIdentifiers(manager.getStartStoreElements())) {
+					ClientSession.setItem(context, startStoreIdentifier, ignoreSet);
+				}
+				showReport(context);
+			}
+		}
+
+
+		@Override
+		public Icon getIcon(final ReportContext<ValidationState> context) {
+			switch (context.getObject().getType()) {
+				case URL_NOT_VALID:
+					return Resources.getIcon("ignore.png", getClass());
+				case IGNORED_ON_RELEASE:
+					return Resources.getIcon("unreleasable.png", getClass());
+				default:
+					return null;
+			}
+		}
+
+
+		@Override
+		public String getIconPath(final ReportContext<ValidationState> context) {
+			switch (context.getObject().getType()) {
+				case URL_NOT_VALID:
+					return Resources.getIconPath("ignore.png", getClass());
+				case IGNORED_ON_RELEASE:
+					return Resources.getIconPath("unreleasable.png", getClass());
+				default:
+					return null;
+			}
+		}
+
+		@Override
+		public String getLabel(ReportContext<ValidationState> context) {
+			return super.getLabel(context);
+		}
+
+		@Override
+		public boolean isEnabled(ReportContext<ValidationState> context) {
+			return super.isEnabled(context);
+		}
+
+		@Override
+		public boolean isVisible(final ReportContext<ValidationState> context) {
+			final Handle handle = context.getObject().getHandle();
+			StoreElement storeElement = (StoreElement) context.getObject().getObject();
+
+			boolean externalHandle = handle instanceof ReferencedEntryHandle && ((ReferencedEntryHandle) handle).getType().equals(ReferencedEntryHandle.Type.EXTERNAL);
+
+			switch (context.getObject().getType()) {
+				case URL_NOT_VALID:
+					if (externalHandle) {
+						return true;
+					}
+					break;
+				case IGNORED_ON_RELEASE:
+			}
+			return false;
 		}
 	}
 }

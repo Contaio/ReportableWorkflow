@@ -131,7 +131,13 @@ public final class Manager {
 		
 		for (StoreElement element : startStoreElements) {
 			if (element instanceof IDProvider) {
-				states.add(0, ValidationState.createDisplayOnly(null, (IDProvider) element));
+				Handle handle;
+				if (states.size() > 0 ) {
+					handle = new DefaultHandle(element, states.get(0).getHandle(), this);
+				} else {
+					handle = new DefaultHandle(element, null, this);
+				}
+				states.add(0, ValidationState.createDisplayOnly(handle, (IDProvider) element));
 			}
 		}
 		
@@ -159,7 +165,13 @@ public final class Manager {
 		
 		for (StoreElement element : startStoreElements) {
 			if (element instanceof IDProvider) {
-				states.add(0, ValidationState.createDisplayOnly(null, (IDProvider) element));
+				Handle handle;
+				if (states.size() > 0 ) {
+					handle = new DefaultHandle(element, states.get(0).getHandle(), this);
+				} else {
+					handle = new DefaultHandle(element, null, this);
+				}
+				states.add(0, ValidationState.createDisplayOnly(handle, (IDProvider) element));
 			}
 		}
 		

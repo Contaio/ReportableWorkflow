@@ -267,6 +267,10 @@ public final class ValidationState implements Comparable<ValidationState> {
 	public static ValidationState createUnreleased(final Handle handle, final IDProvider element) {
 		return new ValidationState(handle, Type.UNRELEASED, element, null);
 	}
+
+	public static ValidationState createURLNotValid(final Handle handle, final IDProvider element) {
+		return new ValidationState(handle, Type.URL_NOT_VALID, element, null);
+	}
 	
 	
 	public enum Type {
@@ -285,7 +289,9 @@ public final class ValidationState implements Comparable<ValidationState> {
 		IS_NOT_EMPTY(Action.DELETE, true),
 		UNSUPPORTED_FOR_DELETE(Action.DELETE, true),
 		DELETABLE(Action.DELETE, false),
-		IGNORED_ON_DELETE(Action.DELETE, false);
+		IGNORED_ON_DELETE(Action.DELETE, false),
+
+		URL_NOT_VALID(Action.RELEASE, true);
 
 		private Action  action;
 		private boolean isPreventing;

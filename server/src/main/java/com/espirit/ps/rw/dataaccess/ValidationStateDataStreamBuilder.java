@@ -77,16 +77,16 @@ public class ValidationStateDataStreamBuilder implements DataStreamBuilder<Valid
 		List<ValidationState> validationStates = manager.getValidationStatesForDisplay(!showAllItems);
 		session.addCaller(validationStates.remove(0));
 		
-		if (manager.getAction().equals(Action.RELEASE)) {
-			for (int n = 0; n < session.getCallerChain().size(); n++) {
-				for (int m = 0; m < validationStates.size(); m++) {
-					if (session.getCallerChain().get(n).getElement().equals(validationStates.get(m).getElement())) {
-						validationStates.remove(m);
-						break;
-					}
-				}
-			}
-		}
+//		if (manager.getAction().equals(Action.RELEASE)) {
+//			for (int n = 0; n < session.getCallerChain().size(); n++) {
+//				for (int m = 0; m < validationStates.size(); m++) {
+//					if (session.getCallerChain().get(n).getElement().equals(validationStates.get(m).getElement())) {
+//						validationStates.remove(m);
+//						break;
+//					}
+//				}
+//			}
+//		}
 		
 		List<ValidationState> resultList = new LinkedList<>();
 		resultList.addAll(session.getCallerChain());

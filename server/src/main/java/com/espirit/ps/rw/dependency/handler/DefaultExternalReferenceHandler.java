@@ -25,17 +25,15 @@ public final class DefaultExternalReferenceHandler extends AbstractDefaultHandle
 		if (handle instanceof ReferencedEntryHandle && ((ReferencedEntryHandle) handle).getType().equals(ReferencedEntryHandle.Type.EXTERNAL)) {
 			switch (manager.getAction()) {
 				case RELEASE:
-					final ExternalReferenceEntry keyObject = (ExternalReferenceEntry) handle.getKeyObject();
+					final String keyObjectURL = ((ExternalReferenceEntry) handle.getKeyObject()).getReferenceString();
 					final IDProvider idProvider = (IDProvider) ((ReferencedEntryHandle) handle).getSourceElement();
 
 					final URL url;
 					try {
-						url = new URL(keyObject.getReferenceString());
+						url = new URL(keyObjectURL);
 					} catch (MalformedURLException ignore) {
-						Logging.logError("previous Handle " + handle.getPreviousHandle(), getClass());
 						handleIgnoreSet(manager, handle, idProvider);
 						break;
-
 					}
 
 					final Boolean checkResult = checkHttpsStatusCode(url);
@@ -51,7 +49,7 @@ public final class DefaultExternalReferenceHandler extends AbstractDefaultHandle
 		}
 	}
 
-	public Boolean checkHttpsStatusCode(URL url) {
+	public Boolean checkHttpsStatusCode(final URL url) {
 		try {
 			final HttpURLConnection openedConnection = (HttpURLConnection) url.openConnection();
 			openedConnection.setRequestMethod("GET");
@@ -68,7 +66,7 @@ public final class DefaultExternalReferenceHandler extends AbstractDefaultHandle
 		if (ignoreSet != null && ignoreSet.contains(idProvider)) {
 			handle.addValidationState(ValidationState.createIgnoredOnRelease(handle, idProvider));
 		} else {
-			handle.addValidationState(ValidationState.createUnreleased(handle, idProvider));
+			handle.addValidationState(ValidationState.createURLNotValid(handle, idProvider));
 		}
 	}
 }
