@@ -5,6 +5,7 @@ import com.espirit.ps.rw.client.ClientSession;
 import com.espirit.ps.rw.common.ReportableWorkflowUtil;
 import com.espirit.ps.rw.dependency.*;
 import com.espirit.ps.rw.resources.Resources;
+import de.espirit.common.base.Logging;
 import de.espirit.firstspirit.access.BaseContext;
 import de.espirit.firstspirit.access.store.IDProvider;
 import de.espirit.firstspirit.access.store.StoreElement;
@@ -76,36 +77,21 @@ public class ValidationStateDataStreamBuilder implements DataStreamBuilder<Valid
 		
 		List<ValidationState> validationStates = manager.getValidationStatesForDisplay(!showAllItems);
 		session.addCaller(validationStates.remove(0));
-		
-//		if (manager.getAction().equals(Action.RELEASE)) {
-//			for (int n = 0; n < session.getCallerChain().size(); n++) {
-//				for (int m = 0; m < validationStates.size(); m++) {
-//					if (session.getCallerChain().get(n).getElement().equals(validationStates.get(m).getElement())) {
-//						validationStates.remove(m);
-//						break;
-//					}
-//				}
-//			}
-//		}
-		
+
 		List<ValidationState> resultList = new LinkedList<>();
 		resultList.addAll(session.getCallerChain());
-		resultList.addAll(validationStates);
-		
-		//store the first element
-		List<ValidationState> subList;
-		if (resultList.size() >= 3) {
-			ValidationState       firstElement = resultList.get(0);
-			subList = resultList.subList(1, resultList.size() - 1);
-			Collections.sort(subList);
-			subList.add(0, firstElement);
-		} else {
-			subList = resultList;
+		for (ValidationState validationState : validationStates) {
+			resultList.add(validationState);
 		}
+
+		//store the first element
+		ValidationState       firstElement = resultList.remove(0);
+		Collections.sort(resultList);
+		resultList.add(0, firstElement);
 		
 		session.storeCallerChain();
 		
-		return new ValidationStateDataStream(context, subList, this);
+		return new ValidationStateDataStream(context, resultList, this);
 	}
 	
 	
