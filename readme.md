@@ -60,10 +60,3 @@ The class AbstractExecutable can be implemented in a project-specific environmen
 * [Feature plan](https://ci.e-spirit.de/browse/PSSOLUTIONSREWO-DEFAULTFEATURE)
 * [Release plan](https://ci.e-spirit.de/browse/PSSOLUTIONSREWO-DEFAULTRELEASE)
 ```
-
-## Currently Involved
-| Name | Role | e-mail |
-| ---- | ------ | ----- |
-| Stefanie Drerup | Consultant | drerup@e-spirit.com |
-
-Former members have been Mario Vaccarisi, Armin Wolf, Florian Ostertag.
